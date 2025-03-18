@@ -5,4 +5,5 @@ export default interface Cliente {
   telefone: string;
   endereco: string;
   data_nascimento: string;
+  senha: string;
 }

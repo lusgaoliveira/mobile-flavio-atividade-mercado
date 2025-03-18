@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
-import Venda from "../models/venda";
+import Venda from "../../models/venda";
+import Link from "next/link"; // Importe o componente Link
 
-const VendaPage = () => {
+const VendasPage = () => {
   const [vendas, setVendas] = useState<Venda[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -12,7 +13,6 @@ const VendaPage = () => {
   useEffect(() => {
     const fetchVendas = async () => {
       try {
-
         const response = await fetch("http://ceteia.guanambi.ifbaiano.edu.br:15050/api/venda");
         if (!response.ok) {
           throw new Error("Erro ao buscar vendas!");
@@ -32,6 +32,10 @@ const VendaPage = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Vendas</h1>
+      {/* Botão para cadastrar venda */}
+      <Link href="/venda/cadastrarVenda">
+        <button className={styles.cadastrarButton}>Cadastrar Venda</button>
+      </Link>
       {loading ? (
         <p>Carregando...</p>
       ) : error ? (
@@ -53,8 +57,8 @@ const VendaPage = () => {
               <tr key={venda.id_venda}>
                 <td>{venda.id_venda}</td>
                 <td>{venda.id_cliente}</td>
-                <td>{new Date(venda.data_venda).toLocaleString()}</td>
-                <td>R${(Number(venda.valor_total) || 0).toFixed(2)}</td>
+                <td>{new Date(venda.data_venda).toLocaleDateString()}</td>
+                <td>R${Number(venda.valor_total).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
@@ -64,4 +68,4 @@ const VendaPage = () => {
   );
 };
 
-export default VendaPage;
+export default VendasPage;

@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
-import Cliente from "../models/cliente";
-
+import Cliente from "../../models/cliente";
+import Link from "next/link"; // Importe o componente Link
 
 const ClientesPage = () => {
   const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -31,8 +31,10 @@ const ClientesPage = () => {
 
   return (
     <div>
-      
       <h1>Lista de Clientes</h1>
+      <Link href="/cliente/cadastrarClientes">
+        <button className={styles.cadastrarButton}>Cadastrar Cliente</button>
+      </Link>
       {loading ? (
         <p>Carregando...</p>
       ) : error ? (
