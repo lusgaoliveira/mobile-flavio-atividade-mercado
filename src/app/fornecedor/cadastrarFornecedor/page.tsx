@@ -50,7 +50,7 @@ const CadastroFornecedor: React.FC<CadastroFornecedorProps> = ({ onCadastroSuces
       if (onCadastroSucesso) {
         onCadastroSucesso();
       } else {
-        router.push("fornecedor/listarFornecedores"); 
+        router.push("/fornecedor/listarFornecedores"); 
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : "Erro ao cadastrar fornecedor.");
